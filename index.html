@@ -83,7 +83,7 @@
     				{
 				        text: 'JSON',
 				        action: function (e, dt, button, config) {
-				            var data = dt.buttons.exportData();
+				            var data = dt.buttons.exportData()
 
 				            $.fn.dataTable.fileSave(
 				                new Blob([JSON.stringify(data)]),
@@ -95,27 +95,25 @@
                 columns: [
                 	{"data": "token",
                         "createdCell": function(cell, cellData) {
-                            let link = document.createElement('a');
-                            let target = "https://mlbcryptobaseball.com/sale/" + cellData;
-                            $(link).attr('href', target);
-                            $(link).text(cellData);
-                            $(cell).html(link);
+                            let link = document.createElement('a')
+                            let target = "https://mlbcryptobaseball.com/sale/" + cellData
+                            $(link).attr('href', target)
+                            $(link).text(cellData)
+                            $(cell).html(link)
                         },
                         "render": function (data, type) {
                             return data;
                         }
                     },
                     {"data": "rarity"},
-                    {"data": "position"},
-                    {"data": "teamEvent"},
                     {"data": "seller",
                         "createdCell": function(cell, cellData) {
                             let text = cellData.substr(0, 8);
-                            let link = document.createElement('a');
-                            let target = "https://etherscan.io/address/" + cellData;
-                            $(link).attr('href', target);
-                            $(link).text(text);
-                            $(cell).html(link);
+                            let link = document.createElement('a')
+                            let target = "https://etherscan.io/address/" + cellData
+                            $(link).attr('href', target)
+                            $(link).text(text)
+                            $(cell).html(link)
                         },
                         "render": function (data, type) {
                             return data;
@@ -127,7 +125,7 @@
                     {"data": "currentPrice"},                   
                     {"data": "startPrice"},
                     {"data": "endPrice"},
-                    {"data": "duration"},
+                    {"data": "duration"}
             	],
     			columnDefs: [
       				{ width: '5%', targets: [ 0, 1, 2, 5, 6, 7, 8, 9 ] },
