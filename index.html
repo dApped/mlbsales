@@ -61,15 +61,39 @@
         }
 
         function populateTable(sales) {
-        	    $.fn.dataTable.moment( 'MMM Do YYYY, h:mm:ss a' );
-                $('#sales').DataTable({
-                    "paging": false,
-                    "orderClasses": false,
-                    "compact": true,
-                    "autoWidth": true,
-                    "data": sales,
-                    "columns": [
-                    {"data": "token",
+        	$.fn.dataTable.moment( 'MMM Do YYYY, h:mm:ss a' );
+            $('#sales').DataTable({
+                paging: false,
+                orderClasses: false,
+                compact: true,
+                autoWidth: true,
+                data: sales,
+                dom:
+                "<'row'<'col-sm-3'B><'col-sm-9'f>>" +
+                "<'row'<'col-sm-12'tr>>", 
+    			buttons: [
+    				{
+    					extend: 'copyHtml5',
+    					exportOptions: { orthogonal: 'export' }
+    				},
+    				{
+    					extend: 'csvHtml5',
+    					exportOptions: { orthogonal: 'export' }
+    				},
+    				{
+				        text: 'JSON',
+				        action: function (e, dt, button, config) {
+				            var data = dt.buttons.exportData();
+
+				            $.fn.dataTable.fileSave(
+				                new Blob([JSON.stringify(data)]),
+				                'Export.json'
+				                );
+				        }
+				    }
+				],
+                columns: [
+                	{"data": "token",
                         "createdCell": function(cell, cellData) {
                             let link = document.createElement('a');
                             let target = "https://mlbcryptobaseball.com/sale/" + cellData;
@@ -104,40 +128,16 @@
                     {"data": "startPrice"},
                     {"data": "endPrice"},
                     {"data": "duration"},
-                    ],
-	    dom:
-			"<'row'<'col-sm-3'B><'col-sm-9'f>>" +
-			"<'row'<'col-sm-12'tr>>", 
-    "buttons": [
-    {
-        extend: 'copyHtml5',
-        exportOptions: { orthogonal: 'export' }
-    },
-    {
-        extend: 'csvHtml5',
-        exportOptions: { orthogonal: 'export' }
-    },
-    {
-        text: 'JSON',
-        action: function (e, dt, button, config) {
-            var data = dt.buttons.exportData();
-
-            $.fn.dataTable.fileSave(
-                new Blob([JSON.stringify(data)]),
-                'Export.json'
-                );
-        }
-    }
-    ],
-    columnDefs: [
-      { width: '5%', targets: [ 0, 1, 2, 5, 6, 7, 8, 9 ] },
-      { width: '20%', targets: [ 3, 4 ] },
-      { className: "dt-head-center, dt-body-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] },
-      { orderable: false, targets: 5 }
-    ],
-    "order": [[ 4, "asc" ]]
-    });
-    }
+            	],
+    			columnDefs: [
+      				{ width: '5%', targets: [ 0, 1, 2, 5, 6, 7, 8, 9 ] },
+      				{ width: '20%', targets: [ 3, 4 ] },
+      				{ className: "dt-head-center, dt-body-center", targets: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ] },
+      				{ orderable: false, targets: 5 }
+    			],
+    			order: [[ 4, "asc" ]]
+    		});
+    	}
 
     </script>
 </body>
