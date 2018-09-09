@@ -239,47 +239,43 @@ const promisify = (inner) =>
     );
 
 async function getCollectibleDetails(id) {
-    var details, x
+    var details
     details = promisify(cb => nftContract.getCollectibleDetails.call(id, cb))
     try {
-        x = await details;
+        return (await details);
     } catch (error) {
         console.log("Couln't get data for id: ", id, error);
     }
-    return x
 }    
 
 async function getSaleTokens() {
-    var tokens, x
+    var tokens
     tokens = promisify(cb => nftContract.tokensOfOwner.call("0xe7232a9fd8bf427aa41918bc008d32290e22990e", cb))
     try {
-        x = await tokens;
+        return (await tokens);
     } catch (error) {
         console.log(error);
     }
-    return x
 }    
 
 async function getSaleDetails(id) {
-    var sale, x
+    var sale
     sale = promisify(cb => salesContract.getSale.call(id, cb))
     try {
-        x = await sale;
+        return (await sale);
     } catch (error) {
         console.log("Couln't get data for id: ", id, error);
     }
-    return x
 }
 
 async function getCurrentPrice(id) {
-    var price, x
+    var price
     price = promisify(cb => salesContract.getCurrentPrice.call(id, cb))
     try {
-        x = await price;
+        return (await price);
     } catch (error) {
         console.log("Couln't get data for id: ", id, error);
     }
-    return x
 }
 
 async function getSaleDetailsWrapper(id) {
