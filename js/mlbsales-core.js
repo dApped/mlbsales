@@ -296,9 +296,9 @@ async function getSaleDetailsWrapper(id) {
 		"token": id,
 		"rarity": rarity,
 		"seller": (d[0]==="0xe7232a9fd8bf427aa41918bc008d32290e22990e") ? "MLB" : d[0],
-		"currentPrice": web3.utils.fromWei(currentPrice.toFixed()),
-		"startPrice": web3.utils.fromWei(d[1].toFixed()),
-		"endPrice": web3.utils.fromWei(d[2].toFixed()),
+		"currentPrice": round(web3.utils.fromWei(currentPrice.toFixed())*10000)/10000,
+		"startPrice": round(web3.utils.fromWei(d[1].toFixed())*10000)/10000,
+		"endPrice": round(web3.utils.fromWei(d[2].toFixed())*10000)/10000,
 		"duration": Math.round(duration/24/60/60*1000)/1000, // days
 		"startTime": moment(startTime).format('MMM Do YYYY, h:mm:ss a'),
 		"endTime": moment(endTime).format('MMM Do YYYY, h:mm:ss a'),
