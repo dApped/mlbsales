@@ -200,10 +200,10 @@ function parseAttributes(str) {
     }
     //return attrs;
     result.position = attributes.position[attrs[0]];
-    //result.stance = attributes.stance[attrs[1]];
+    result.stance = attributes.stance[attrs[1]];
     //result.itemType = attributes.itemType[attrs[1]];
-    //result.item = attributes.item[attributes.itemType[attrs[1]]][attrs[5]];
-    //result.uniform = attributes.uniform[attrs[6]];
+    result.item = attributes.item[attributes.itemType[attrs[1]]][attrs[5]];
+    result.uniform = attributes.uniform[attrs[6]];
     result.rarity = attributes.rarity[attrs[7]];
     result.team = attributes.team[attrs[9]];
     result.teamEvent = attributes.teamEvent[attrs[13]];
@@ -325,6 +325,9 @@ async function getSaleDetailsWrapper(id) {
 		"position": details.attributes.position,
 		"teamEvent": details.attributes.teamEvent,
 		"rarity": details.attributes.rarity,
+		"item": details.attributes.item,
+		"uniform": details.attributes.uniform,
+		"stance": details.attributes.stance,
 		"seller": (d[0]==="0xe7232a9fd8bf427aa41918bc008d32290e22990e") ? "MLB" : d[0],
 		"currentPrice": Math.round(web3.utils.fromWei(currentPrice.toFixed())*10000)/10000,
 		"startPrice": Math.round(web3.utils.fromWei(d[1].toFixed())*10000)/10000,
